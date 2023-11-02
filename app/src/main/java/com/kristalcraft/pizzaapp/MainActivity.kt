@@ -1,13 +1,9 @@
 package com.kristalcraft.pizzaapp
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.kristalcraft.pizzaapp.databinding.ActivityMainBinding
+import com.kristalcraft.pizzaapp.ui.MenuFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +14,16 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        openMenu()
+    }
 
+    fun openMenu(){
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fragmentContainer.id, MenuFragment(), MENU)
+            .commit()
+    }
+
+    companion object{
+        const val MENU = "menu"
     }
 }
