@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="88dp"
+    android:layout_height="32dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="10dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_marginStart="8dp"
+    app:cardBackgroundColor="@color/white"
+    android:id="@+id/tag_cardview"
+    android:outlineSpotShadowColor="@color/grey_shadow"
+    android:outlineAmbientShadowColor="@color/grey_shadow">
+
+    <TextView
+        android:id="@+id/tag_name"
+        style="@style/sf_ui_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        tools:text="Пицца"
+        />
+
+</androidx.cardview.widget.CardView>
