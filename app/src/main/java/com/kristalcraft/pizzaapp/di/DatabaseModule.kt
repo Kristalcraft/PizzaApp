@@ -3,8 +3,8 @@ package com.kristalcraft.pizzaapp.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.kristalcraft.pizzaapp.data.DishDB
-import com.kristalcraft.pizzaapp.data.DishDao
+import com.kristalcraft.pizzaapp.data.db.DishDB
+import com.kristalcraft.pizzaapp.data.db.DishDao
 import dagger.Module
 import dagger.Provides
 import java.util.concurrent.Executors
