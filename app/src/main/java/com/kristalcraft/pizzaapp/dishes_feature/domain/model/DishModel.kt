@@ -1,4 +1,4 @@
-package com.kristalcraft.pizzaapp.domain.model
+package com.kristalcraft.pizzaapp.dishes_feature.domain.model
 
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose

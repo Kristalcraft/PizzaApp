@@ -1,4 +1,4 @@
-package com.kristalcraft.pizzaapp.domain.model
+package com.kristalcraft.pizzaapp.dishes_feature.domain.model
 
 import com.kristalcraft.delegate_adapter.DelegateAdapterItem
 

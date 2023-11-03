@@ -1,11 +1,11 @@
-package com.kristalcraft.pizzaapp.data.models
+package com.kristalcraft.pizzaapp.dishes_feature.data.models
 
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.kristalcraft.pizzaapp.domain.model.DishModel
+import com.kristalcraft.pizzaapp.dishes_feature.domain.model.DishModel
 
 @Entity(
     indices = [

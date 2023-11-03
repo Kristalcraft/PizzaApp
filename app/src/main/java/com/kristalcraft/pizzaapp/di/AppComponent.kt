@@ -4,7 +4,9 @@ import android.content.Context
 import com.kristalcraft.pizzaapp.App
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Scope
 
+@Application
 @Component(modules = [NetworkModule::class, DatabaseModule::class])
 interface AppComponent{
 
@@ -19,3 +21,7 @@ interface AppComponent{
     }
 
 }
+
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class Application

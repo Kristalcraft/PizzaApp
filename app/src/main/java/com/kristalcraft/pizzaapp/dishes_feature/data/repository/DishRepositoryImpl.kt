@@ -1,10 +1,10 @@
-package com.kristalcraft.pizzaapp.data.repository
+package com.kristalcraft.pizzaapp.dishes_feature.data.repository
 
-import com.kristalcraft.pizzaapp.data.db.DishDao
-import com.kristalcraft.pizzaapp.data.models.CategoryDto
-import com.kristalcraft.pizzaapp.data.models.DishDto
-import com.kristalcraft.pizzaapp.data.remote.DishApi
-import com.kristalcraft.pizzaapp.domain.repository.DishRepository
+import com.kristalcraft.pizzaapp.dishes_feature.data.db.DishDao
+import com.kristalcraft.pizzaapp.dishes_feature.data.models.CategoryDto
+import com.kristalcraft.pizzaapp.dishes_feature.data.models.DishDto
+import com.kristalcraft.pizzaapp.dishes_feature.data.remote.DishApi
+import com.kristalcraft.pizzaapp.dishes_feature.domain.repository.DishRepository
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -38,10 +38,10 @@ class DishRepositoryImpl @Inject constructor(
            CategoryDto(name = it.category, id = null)
         }
         putCategoriesIntoDb(categories)
-        dishDao.insert(dishes)
+        dishDao.insertDishes(dishes)
     }
 
     private suspend fun putCategoriesIntoDb(categories: List<CategoryDto>){
-        dishDao.insert(categories)
+        dishDao.insertCategories(categories)
     }
 }

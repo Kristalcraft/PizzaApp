@@ -1,4 +1,4 @@
-package com.kristalcraft.pizzaapp.ui
+package com.kristalcraft.pizzaapp.dishes_feature.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

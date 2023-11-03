@@ -3,8 +3,8 @@ package com.kristalcraft.pizzaapp.di
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.kristalcraft.pizzaapp.data.db.DishDB
-import com.kristalcraft.pizzaapp.data.db.DishDao
+import com.kristalcraft.pizzaapp.dishes_feature.data.db.DishDB
+import com.kristalcraft.pizzaapp.dishes_feature.data.db.DishDao
 import dagger.Module
 import dagger.Provides
 import java.util.concurrent.Executors
@@ -13,6 +13,7 @@ import java.util.concurrent.Executors
 class DatabaseModule {
 
     @Provides
+    @Application
     fun provideDatabase(applicationContext: Context): DishDB {
         val callback = object: RoomDatabase.QueryCallback {
             override fun onQuery(sqlQuery: String, bindArgs: List<Any?>) {
@@ -25,6 +26,7 @@ class DatabaseModule {
     }
 
     @Provides
+    @Application
     fun provideDishDao(dishDB: DishDB): DishDao {
         return dishDB.getDishDao()
     }

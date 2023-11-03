@@ -1,9 +1,9 @@
-package com.kristalcraft.pizzaapp.data.db
+package com.kristalcraft.pizzaapp.dishes_feature.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.kristalcraft.pizzaapp.data.models.CategoryDto
-import com.kristalcraft.pizzaapp.data.models.DishDto
+import com.kristalcraft.pizzaapp.dishes_feature.data.models.CategoryDto
+import com.kristalcraft.pizzaapp.dishes_feature.data.models.DishDto
 
 @Database(
     entities = [

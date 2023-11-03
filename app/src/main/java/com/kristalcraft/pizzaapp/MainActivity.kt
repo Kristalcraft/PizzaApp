@@ -3,7 +3,7 @@ package com.kristalcraft.pizzaapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.kristalcraft.pizzaapp.databinding.ActivityMainBinding
-import com.kristalcraft.pizzaapp.ui.MenuFragment
+import com.kristalcraft.pizzaapp.dishes_feature.ui.MenuFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         openMenu()
     }
 
-    fun openMenu(){
+    private fun openMenu(){
         supportFragmentManager.beginTransaction()
             .replace(binding.fragmentContainer.id, MenuFragment(), MENU)
             .commit()
