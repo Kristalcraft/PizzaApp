@@ -33,15 +33,19 @@
 
     <TextView
         android:id="@+id/subtitle"
+        style="@style/sf_ui_subtitle"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="@id/title"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="middle"
+        app:layout_constraintBottom_toTopOf="@id/price"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Ветчина,шампиньоны, увеличинная порция моцареллы, томатный соус"
-        />
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Ветчина,шампиньоны, увеличинная порция моцареллы, томатный соус" />
 
     <TextView
         android:id="@+id/price"
@@ -49,11 +53,11 @@
         android:layout_height="32dp"
         android:background="@drawable/menu_price_back"
         android:minWidth="87dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/subtitle"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/subtitle"
-        app:layout_constraintTop_toBottomOf="@id/subtitle"
         android:gravity="center"
         style="@style/sf_ui_price"
         tools:text="от 345 р"
