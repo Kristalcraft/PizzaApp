@@ -26,6 +26,8 @@ class DishesViewModel @Inject constructor(
     private val getDishesUseCase: GetDishesUseCase
 ): ViewModel(){
 
+    private var initCategory: Boolean = false
+
     private val _categoriesState: MutableStateFlow<List<CategoryModel>> = MutableStateFlow(listOf())
     val categoriesState: StateFlow<List<CategoryModel>> = _categoriesState
 
@@ -37,9 +39,6 @@ class DishesViewModel @Inject constructor(
 
     init{
         getCategories()
-        categoriesState.value.firstOrNull()?.let{
-            getDishes(it.name)
-        }
     }
 
     fun getCategories(){
@@ -48,6 +47,12 @@ class DishesViewModel @Inject constructor(
                 is Resource.Success -> {
                     _categoriesState.update {
                         result.data?: emptyList()
+                    }
+                    if (!initCategory){
+                        categoriesState.value.firstOrNull()?.let{
+                            getDishes(it.name)
+                        }
+                        initCategory = true
                     }
                 }
                 is Resource.Loading -> {
@@ -68,6 +73,7 @@ class DishesViewModel @Inject constructor(
                     _dishesState.update {
                         result.data?: emptyList()
                     }
+
                 }
                 is Resource.Loading -> {
                     _messageState.emit("Loading...")
