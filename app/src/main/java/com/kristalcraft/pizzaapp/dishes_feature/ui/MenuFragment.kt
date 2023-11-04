@@ -99,6 +99,16 @@ class MenuFragment : Fragment() {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             }
         }
+
+        fragmentCoroutineScope.launch {
+            viewModel.loadingState.collect{ loading ->
+                binding.swipeRefresh.isRefreshing = loading
+                binding.swipeRefresh.setOnRefreshListener {
+                    viewModel.categoriesState.value.firstOrNull { it.isSelected }
+                        ?.let { it1 -> viewModel.getDishes(it1.name) }
+                }
+            }
+        }
     }
 
     private fun buildComponent() {

@@ -37,6 +37,9 @@ class DishesViewModel @Inject constructor(
     private val _messageState: MutableSharedFlow<String> = MutableSharedFlow()
     val messageState: SharedFlow<String> = _messageState
 
+    private val _loadingState: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val loadingState: StateFlow<Boolean> = _loadingState
+
     init{
         getCategories()
     }
@@ -54,11 +57,13 @@ class DishesViewModel @Inject constructor(
                         }
                         initCategory = true
                     }
+                    _loadingState.value = false
                 }
                 is Resource.Loading -> {
-                    _messageState.emit("Loading...")
+                    _loadingState.value = true
                 }
                 is Resource.Error -> {
+                    _loadingState.value = false
                     _messageState.emit(result.message?: "Something went wrong")
                 }
             }
@@ -73,12 +78,13 @@ class DishesViewModel @Inject constructor(
                     _dishesState.update {
                         result.data?: emptyList()
                     }
-
+                    _loadingState.value = false
                 }
                 is Resource.Loading -> {
-                    _messageState.emit("Loading...")
+                    _loadingState.value = true
                 }
                 is Resource.Error -> {
+                    _loadingState.value = false
                     _messageState.emit(result.message?: "Something went wrong")
                 }
             }
