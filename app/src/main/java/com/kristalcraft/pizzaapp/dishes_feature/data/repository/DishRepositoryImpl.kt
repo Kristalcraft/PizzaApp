@@ -37,7 +37,7 @@ class DishRepositoryImpl @Inject constructor(
         val categories = dishes.map {
            CategoryDto(name = it.category, id = null)
         }
-        putCategoriesIntoDb(categories)
+        putCategoriesIntoDb(categories.distinct())
         dishDao.insertDishes(dishes)
     }
 
