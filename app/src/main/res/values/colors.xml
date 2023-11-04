@@ -8,12 +8,13 @@
     <color name="black">#FF000000</color>
     <color name="black_light">#FF222831</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="figma_B1">#FFFD3A69</color>
+    <color name="red">#FFFD3A69</color>
+    <color name="red_transparent">#33FD3A69</color>
     <color name="figma_grey">#FF7B7B7B</color>
     <color name="grey_light">#FFFBFBFB</color>
     <color name="grey_dark">#FFF0F0F0</color>
     <color name="grey_text">#C3C4C9</color>
-    <color name="grey_shadow">#2BBEBEBE</color>
+    <color name="grey_shadow">#4D000000</color>
     <color name="grey_medium">#AAAAAD</color>
 
 </resources>

@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -60,6 +61,7 @@ class DishesViewModel @Inject constructor(
     }
 
     fun getDishes(category: String){
+        selectTag(category)
         getDishesUseCase(category).onEach {result ->
             when(result){
                 is Resource.Success -> {
@@ -76,6 +78,23 @@ class DishesViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope + Dispatchers.IO)
     }
+
+    fun selectTag(name: String){
+        val categories = arrayListOf<CategoryModel>()
+        categoriesState.value.forEach {
+            categories.add(
+                CategoryModel(
+                    id = it.id,
+                    name = it.name,
+                    isSelected = it.name == name
+                )
+            )
+        }
+        _categoriesState.update{
+            categories
+        }
+    }
+
 }
 
 @Suppress("UNCHECKED_CAST")

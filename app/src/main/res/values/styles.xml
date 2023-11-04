@@ -37,7 +37,7 @@
         <item name="android:textSize">13sp</item>
         <item name="android:lineHeight">15.5sp</item>
         <item name="android:fontWeight">600</item>
-        <item name="android:textColor">@color/figma_B1</item>
+        <item name="android:textColor">@color/red</item>
     </style>
 
     <style name="sf_ui_category">
@@ -49,6 +49,6 @@
     </style>
 
     <style name="sf_ui_price" parent="sf_ui_category">
-        <item name="android:textColor">@color/figma_B1</item>
+        <item name="android:textColor">@color/red</item>
     </style>
 </resources>

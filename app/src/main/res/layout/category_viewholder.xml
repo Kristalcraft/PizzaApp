@@ -9,6 +9,8 @@
     android:elevation="10dp"
     app:cardCornerRadius="10dp"
     android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     app:cardBackgroundColor="@color/white"
     android:id="@+id/background"
     android:outlineSpotShadowColor="@color/grey_shadow"

@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kristalcraft.delegate_adapter.DelegateAdapterItem
 import com.kristalcraft.delegate_adapter.MainCompositeAdapter
 import com.kristalcraft.pizzaapp.App
 import com.kristalcraft.pizzaapp.databinding.FragmentMenuBinding
 import com.kristalcraft.pizzaapp.dishes_feature.di.DaggerDishesComponent
 import com.kristalcraft.pizzaapp.dishes_feature.di.DishesComponent
+import com.kristalcraft.pizzaapp.dishes_feature.domain.model.CategoryModel
 import com.kristalcraft.pizzaapp.dishes_feature.ui.recyclerview.CategoriesAdapterDelegate
 import com.kristalcraft.pizzaapp.dishes_feature.ui.recyclerview.DishAdapterDelegate
 import kotlinx.coroutines.CoroutineScope
@@ -64,7 +66,17 @@ class MenuFragment : Fragment() {
 
         fragmentCoroutineScope.launch {
             viewModel.categoriesState.collect{
-                categoryAdapter.submitList(it)
+                val list = ArrayList<CategoryModel>()
+                it.forEach {thisCat->
+                    list.add(
+                        CategoryModel(
+                            thisCat.id,
+                            thisCat.name,
+                            thisCat.isSelected
+                        )
+                    )
+                }
+                categoryAdapter.submitList(list as List<DelegateAdapterItem>?)
             }
         }
 

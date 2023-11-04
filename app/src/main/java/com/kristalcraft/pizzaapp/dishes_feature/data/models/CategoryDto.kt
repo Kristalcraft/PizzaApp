@@ -7,7 +7,7 @@ import com.kristalcraft.pizzaapp.dishes_feature.domain.model.CategoryModel
 
 @Entity(
     indices = [
-        Index(value = ["id"])
+        Index(value = ["name"], unique = true)
     ]
 )
 data class CategoryDto (
@@ -19,6 +19,7 @@ data class CategoryDto (
 fun CategoryDto.mapToCategoryModel(): CategoryModel {
     return CategoryModel(
         id = id?:-1,
-        name = name
+        name = name,
+        isSelected = false
     )
 }
