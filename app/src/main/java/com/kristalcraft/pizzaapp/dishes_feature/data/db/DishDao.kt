@@ -13,7 +13,7 @@ interface DishDao {
 
 
     @Query("SELECT * FROM DishDto WHERE category = :category ORDER by id")
-    fun getDishesByCategory(category: String): Flow<List<DishDto>>
+    fun getDishesByCategory(category: String): List<DishDto>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDishes(dishes: List<DishDto>)

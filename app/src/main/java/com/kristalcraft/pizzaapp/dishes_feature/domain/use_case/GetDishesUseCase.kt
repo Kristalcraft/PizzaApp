@@ -5,9 +5,7 @@ import com.kristalcraft.pizzaapp.dishes_feature.data.models.mapToDishModel
 import com.kristalcraft.pizzaapp.dishes_feature.domain.model.DishModel
 import com.kristalcraft.pizzaapp.dishes_feature.domain.repository.DishRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onStart
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -16,20 +14,24 @@ class GetDishesUseCase @Inject constructor(
     private val dishRepo: DishRepository
 ) {
     operator fun invoke(category: String): Flow<Resource<List<DishModel>>> = flow {
-            dishRepo.getDishes(category)
-                .onStart {
-                   emit(Resource.Loading())
+            emit(Resource.Loading())
+        try {
+            val data = dishRepo.getDishes(category)
+            emit(Resource.Success(data = data.map { it.mapToDishModel() }))
+        } catch (e: Exception) {
+            when (e) {
+                is HttpException -> {
+                    emit(Resource.Error(e.localizedMessage?: "Unexpected Error"))
                 }
-                .catch {
-                    if (it is HttpException){
-                        emit(Resource.Error(it.localizedMessage?: "Unexpected Error"))
-                    } else if (it is IOException) {
-                        emit(Resource.Error("Check your internet connection"))
-                    }
+                is IOException -> {
+                    emit(Resource.Error("Check your internet connection"))
                 }
-                .collect{ list ->
-                    emit(Resource.Success(data = list.map { it.mapToDishModel() }))
+                else -> {
+                    emit(Resource.Error("Unexpected error"))
                 }
+            }
+        }
+
     }
 
 }

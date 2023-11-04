@@ -1,5 +1,6 @@
 package com.kristalcraft.pizzaapp.dishes_feature.data.repository
 
+import android.util.Log
 import com.kristalcraft.pizzaapp.dishes_feature.data.db.DishDao
 import com.kristalcraft.pizzaapp.dishes_feature.data.models.CategoryDto
 import com.kristalcraft.pizzaapp.dishes_feature.data.models.DishDto
@@ -14,7 +15,7 @@ class DishRepositoryImpl @Inject constructor(
     private val dishApi: DishApi,
     private val dishDao: DishDao
 ): DishRepository {
-    override suspend fun getDishes(category: String): Flow<List<DishDto>> {
+    override suspend fun getDishes(category: String): List<DishDto> {
         coroutineScope {
             launch {
                 getDishesFromApi()
@@ -33,7 +34,12 @@ class DishRepositoryImpl @Inject constructor(
     }
 
     private suspend fun getDishesFromApi(){
-        val dishes = dishApi.getDishes()
+        var dishes: List<DishDto> = emptyList()
+        try {
+            dishes = dishApi.getDishes()
+        } catch (e: Exception){
+            Log.e("Exception", "${e.message} ${e.cause}")
+        }
         val categories = dishes.map {
            CategoryDto(name = it.category, id = null)
         }

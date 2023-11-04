@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface DishRepository {
 
-    suspend fun getDishes(category: String): Flow<List<DishDto>>
+    suspend fun getDishes(category: String): List<DishDto>
     suspend fun getCategories(): Flow<List<CategoryDto>>
 }
