@@ -5,16 +5,14 @@
     android:layout_height="32dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="10dp"
-    android:elevation="10dp"
+    app:cardElevation="15dp"
+    android:elevation="15dp"
     app:cardCornerRadius="10dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
     app:cardBackgroundColor="@color/white"
-    android:id="@+id/background"
-    android:outlineSpotShadowColor="@color/grey_shadow"
-    android:outlineAmbientShadowColor="@color/grey_shadow">
+    android:id="@+id/background">
 
     <TextView
         android:id="@+id/name"
