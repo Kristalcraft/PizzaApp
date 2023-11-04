@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="88dp"
     android:layout_height="32dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,12 +10,12 @@
     app:cardCornerRadius="10dp"
     android:layout_marginStart="8dp"
     app:cardBackgroundColor="@color/white"
-    android:id="@+id/tag_cardview"
+    android:id="@+id/background"
     android:outlineSpotShadowColor="@color/grey_shadow"
     android:outlineAmbientShadowColor="@color/grey_shadow">
 
     <TextView
-        android:id="@+id/tag_name"
+        android:id="@+id/name"
         style="@style/sf_ui_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
