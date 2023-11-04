@@ -16,7 +16,7 @@ data class CategoryDto (
     val name: String
 )
 
-fun CategoryDto.toCategoryModel(): CategoryModel {
+fun CategoryDto.mapToCategoryModel(): CategoryModel {
     return CategoryModel(
         id = id?:-1,
         name = name
