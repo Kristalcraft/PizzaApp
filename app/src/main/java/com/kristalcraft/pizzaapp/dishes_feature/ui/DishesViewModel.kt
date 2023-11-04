@@ -1,0 +1,92 @@
+package com.kristalcraft.pizzaapp.dishes_feature.ui
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.kristalcraft.pizzaapp.common.Resource
+import com.kristalcraft.pizzaapp.dishes_feature.domain.model.CategoryModel
+import com.kristalcraft.pizzaapp.dishes_feature.domain.model.DishModel
+import com.kristalcraft.pizzaapp.dishes_feature.domain.use_case.GetCategoriesUseCase
+import com.kristalcraft.pizzaapp.dishes_feature.domain.use_case.GetDishesUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.plus
+import javax.inject.Inject
+import javax.inject.Singleton
+
+class DishesViewModel @Inject constructor(
+    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val getDishesUseCase: GetDishesUseCase
+): ViewModel(){
+
+    private val _categoriesState: MutableStateFlow<List<CategoryModel>> = MutableStateFlow(listOf())
+    val categoriesState: StateFlow<List<CategoryModel>> = _categoriesState
+
+    private val _dishesState: MutableStateFlow<List<DishModel>> = MutableStateFlow(listOf())
+    val dishesState: StateFlow<List<DishModel>> = _dishesState
+
+    private val _messageState: MutableSharedFlow<String> = MutableSharedFlow()
+    val messageState: SharedFlow<String> = _messageState
+
+    init{
+        getCategories()
+        categoriesState.value.firstOrNull()?.let{
+            getDishes(it.name)
+        }
+    }
+
+    fun getCategories(){
+        getCategoriesUseCase().onEach {result ->
+            when(result){
+                is Resource.Success -> {
+                    _categoriesState.update {
+                        result.data?: emptyList()
+                    }
+                }
+                is Resource.Loading -> {
+                    _messageState.emit("Loading...")
+                }
+                is Resource.Error -> {
+                    _messageState.emit(result.message?: "Something went wrong")
+                }
+            }
+        }.launchIn(viewModelScope + Dispatchers.IO)
+    }
+
+    fun getDishes(category: String){
+        getDishesUseCase(category).onEach {result ->
+            when(result){
+                is Resource.Success -> {
+                    _dishesState.update {
+                        result.data?: emptyList()
+                    }
+                }
+                is Resource.Loading -> {
+                    _messageState.emit("Loading...")
+                }
+                is Resource.Error -> {
+                    _messageState.emit(result.message?: "Something went wrong")
+                }
+            }
+        }.launchIn(viewModelScope + Dispatchers.IO)
+    }
+}
+
+@Suppress("UNCHECKED_CAST")
+@Singleton
+class ViewModelFactory (
+    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val getDishesUseCase: GetDishesUseCase
+): ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return DishesViewModel(getCategoriesUseCase, getDishesUseCase) as T
+    }
+
+}
